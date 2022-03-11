@@ -43,6 +43,11 @@ class MyHomePage extends StatelessWidget {
               Container(color: Colors.red,),
             ],
           ),
+          bottomNavigationBar: BottomNavigationBar(items: [
+            BottomNavigationBarItem(icon: Icon(Icons.home),label: 'Home',),
+            BottomNavigationBarItem(icon: Icon(Icons.person),label: 'Person',),
+            BottomNavigationBarItem(icon: Icon(Icons.notifications),label: 'Notifiction',),
+          ]),
         )
     );
   }
