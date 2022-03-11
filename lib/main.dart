@@ -27,7 +27,7 @@ class MyHomePage extends StatelessWidget {
       appBar:AppBar(
         title: Text('제목'),
       ),
-      body: Column(
+      body: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
