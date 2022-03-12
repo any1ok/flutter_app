@@ -38,9 +38,27 @@ class MyHomePage extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
-              Container(color: Colors.yellow,),
-              Container(color: Colors.orange,),
-              Container(color: Colors.red,),
+              Center(
+                child: Container(
+                  color: Colors.red,
+                  width: 100,
+                  height: 100,
+                )
+              ),
+              Center(
+                  child: Container(
+                    color: Colors.black,
+                    width: 100,
+                    height: 100,
+                  )
+              ),
+              Center(
+                  child: Container(
+                    color: Colors.blue,
+                    width: 100,
+                    height: 100,
+                  )
+              ),
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(items: [
