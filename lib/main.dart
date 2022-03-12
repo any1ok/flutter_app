@@ -20,17 +20,66 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+
+class MyHomePage extends StatefulWidget {
   @override
-  Widget build(BuildContext context){
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  DateTime _selectedTime= DateTime.now();
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('재목'),
+        title: Text('DatePicker'),
+        actions: <Widget>[
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.home),
+          ),
+        ],
       ),
-      body: Center(
-        child:CircularProgressIndicator(),
-      )
-      );
+      body: Column(
+        children: <Widget>[
+          ElevatedButton(
+            onPressed: () {
+              Future<TimeOfDay?> selectedTime = showTimePicker(
+                initialTime: TimeOfDay.now(),
+                context: context,
+              );
+
+              selectedTime.then((timeOfDay) {
+                setState(() {
+                  _selectedTime = '${timeOfDay?.hour}:${timeOfDay?.minute}' as DateTime;
+                });
+              });
+            },
+            child: Text('Time Picker'),
+          ),
+          Text('$_selectedTime'),
+        ],
+      ),
+    );
   }
 }
 
+//
+// class MyHomePage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context){
+//     return Scaffold(
+//         appBar: AppBar(
+//           title: Text('재목'),
+//         ),
+//         body: Center(
+//           child: TextField(
+//             decoration: InputDecoration(
+//                 border: OutlineInputBorder(), labelText: '여기에 입력하세요'),
+//           ),
+//         )
+//     );
+//   }
+// }
+//
