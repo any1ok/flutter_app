@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,55 +17,83 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: SilverListPage(),
     );
   }
 }
 
-
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  DateTime _selectedTime= DateTime.now();
-
+class SilverListPage extends StatelessWidget {
+  final _items = List.generate(50, (i) => ListTile(title: Text('NO.$i')));
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('DatePicker'),
-        actions: <Widget>[
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.home),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            pinned: true,
+            expandedHeight:  180.0,
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text('Sliver'),
+              background: Image.asset(
+                'assets/sample.png',
+                fit: BoxFit.cover,
+              ),
+            ),
+            actions: [
+              IconButton(onPressed: (){}, icon: Icon(Icons.start))
+            ],
           ),
-        ],
-      ),
-      body: Column(
-        children: <Widget>[
-          ElevatedButton(
-            onPressed: () {
-              Future<TimeOfDay?> selectedTime = showTimePicker(
-                initialTime: TimeOfDay.now(),
-                context: context,
-              );
-
-              selectedTime.then((timeOfDay) {
-                setState(() {
-                  _selectedTime = '${timeOfDay?.hour}:${timeOfDay?.minute}' as DateTime;
-                });
-              });
-            },
-            child: Text('Time Picker'),
-          ),
-          Text('$_selectedTime'),
+          SliverList(
+            delegate: SliverChildListDelegate(_items),
+          )
         ],
       ),
     );
   }
 }
+
+
+
+//
+// class MyHomePage extends StatefulWidget {
+//   @override
+//   _MyHomePageState createState() => _MyHomePageState();
+// }
+//
+// class _MyHomePageState extends State<MyHomePage> {
+//   var _size = 100.0;
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('DatePicker'),
+//         actions: <Widget>[
+//           IconButton(
+//             onPressed: () {},
+//             icon: Icon(Icons.home),
+//           ),
+//         ],
+//       ),
+//       body: Center(
+//         child: GestureDetector(
+//           onTap: (){
+//             final random = Random();
+//             setState((){
+//               _size = random.nextInt(200).toDouble() +100;
+//             });
+//           },
+//           child: AnimatedContainer(
+//             duration: Duration(seconds: 1),
+//             width: _size,
+//             height: _size,
+//             child:  Image.asset('assets/sample.png'),
+//             curve: Curves.fastOutSlowIn,
+//           ),
+//         ),
+//       )
+//     );
+//   }
+// }
 
 //
 // class MyHomePage extends StatelessWidget {
